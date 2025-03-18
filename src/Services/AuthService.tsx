@@ -31,5 +31,16 @@ class AuthService{
             throw new Error("error occured while registring the user ")            
         }
     }
+
+    async Logout(token:string):Promise<void>{
+        try{
+            const response = await axios.post(`${AuthService.JavaBasePath}/logout`,null,{headers:{"Authorization":`Bearer ${token}`}})
+            console.log(response.data);
+        }catch(e){
+            console.log(e);
+            throw new Error("error occured while registring the user ")            
+        }
+    }
 }
+
 export default new AuthService();

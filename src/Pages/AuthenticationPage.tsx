@@ -11,14 +11,14 @@ export default function AuthenticationPage() {
                 <div className="flex mb-6">
                     <button
                         className={`w-1/2 text-center py-3 font-semibold transition duration-300 
-                        ${activePage === "login" ? "bg-purple-500 text-white" : "bg-gray-200 text-gray-700"}`}
+                        ${activePage === "login" ? "bg-black text-white" : "bg-white text-black"}`}
                         onClick={() => setActivePage("login")}
                     >
                         Login
                     </button>
                     <button
                         className={`w-1/2 text-center py-3 font-semibold transition duration-300 
-                        ${activePage === "register" ? "bg-purple-500 text-white" : "bg-gray-200 text-gray-700"}`}
+                        ${activePage === "register" ? "bg-black text-white" : "bg-white text-black"}`}
                         onClick={() => setActivePage("register")}
                     >
                         Register

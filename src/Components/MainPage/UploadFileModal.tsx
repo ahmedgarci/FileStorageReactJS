@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import UploadFileForm from './UploadFileForm';
 
@@ -22,6 +20,7 @@ export default function UploadFileModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  
   return (
     <div>
       <button className=' bg-black text-white px-4 py-2 rounded-md shadow ' onClick={handleOpen}>Upload File</button>

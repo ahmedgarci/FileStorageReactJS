@@ -6,6 +6,7 @@ import UploadFileModal from "../Components/MainPage/UploadFileModal";
 
 export default function Main() {
   const { isError, data, isLoading } = useFetch()
+  
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />

@@ -23,7 +23,6 @@ function Auth() {
         setError(null);
         try {
             const response: AuthResponse = await AuthService.Authenticate(user);
-            console.log(response);
             dispatch(SETAUTHENTICATION(response));
             navigate("/main");
         } catch (error: any) {
@@ -57,13 +56,6 @@ function Auth() {
                         style="w-full px-4 py-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition duration-300"
                         />
                 </div>
-
-                <div className="mb-4 text-center">
-                    <a href="#" className="text-purple-600 hover:underline">
-                        Forgot Password?
-                    </a>
-                </div>
-
                 {isLoading ? (
                     <Loading />
                 ) : (
@@ -74,12 +66,7 @@ function Auth() {
                 )}
             </form>
 
-            <div className="mt-4 text-center">
-                <span className="text-gray-700">Don't have an account?</span>{" "}
-                <a href="#" className="text-purple-600 hover:underline">
-                    Sign up
-                </a>
-            </div>
+          
         </div>
     );
 }
