@@ -1,6 +1,5 @@
 
 interface UploadFileRequest{
-    title?:string
     form?:FormData
 
 }

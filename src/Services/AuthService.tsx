@@ -10,25 +10,21 @@ class AuthService{
     async Register(user:RegisterRequest):Promise<void>{
         try{
             const response = await axios.post(`${AuthService.JavaBasePath}/register`,user)
-            console.log(response);
-        }catch(e){
-            console.log(e);
-            throw new Error("error occured while registring the user ")            
+        }catch(e:any){
+            throw e.response.data            
         }
     }
 
     async Authenticate(user:AuthRequest):Promise<AuthResponse>{
         try{
             const response = await axios.post(`${AuthService.JavaBasePath}/authenticate`,user,{withCredentials:true})
-            console.log(response.data);
             return {
                 jwt:response.data,
                 expiration: new Date(),
                 username:"ahmed garci"
             }
-        }catch(e){
-            console.log(e);
-            throw new Error("error occured while registring the user ")            
+        }catch(e:any){
+            throw e.response.data            
         }
     }
 
@@ -38,7 +34,7 @@ class AuthService{
             console.log(response.data);
         }catch(e){
             console.log(e);
-            throw new Error("error occured while registring the user ")            
+            throw new Error("error occured while logging out the user ")            
         }
     }
 }

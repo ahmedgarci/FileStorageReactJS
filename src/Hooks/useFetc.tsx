@@ -6,7 +6,7 @@ import { AuthResponse } from "../Types/Responses/AuthType";
 
 function useFetch() {
   const authData:AuthResponse = useSelector((state:RootState)=> state.auth)
-  console.log(authData);
+
   return useInfiniteQuery({
     queryKey: ["fetchMyFiles"],
     queryFn: async ({ pageParam = 1 }) => {

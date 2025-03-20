@@ -1,5 +1,6 @@
 
 interface FileResponse{
+    id:number,
     path:string,
     mimeType:string,
     title:string

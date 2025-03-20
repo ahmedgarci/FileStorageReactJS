@@ -8,7 +8,7 @@ class FileService{
     // TO ADD PAGE PARAM
     async getMyFiles(token:string,pageNumber:number):Promise<FilePageResponse>{
         try {
-        const response =  await axios.get(`${this.JavaEndpoint}/all`,{headers:{"Authorization":`Bearer ${token}`}})   
+        const response =  await axios.get(`${this.JavaEndpoint}/all?pageNumber=${pageNumber}`,{headers:{"Authorization":`Bearer ${token}`}})   
         console.log(response)
         return response.data        
         } catch (error:any) {
@@ -17,7 +17,7 @@ class FileService{
         }
     }
     
-    async UploadNewFile(request:UploadFileRequest,token:string):Promise<void>{
+    async UploadNewFile(request:FormData,token:string):Promise<void>{
         try {
             const response =  await axios.post(`${this.JavaEndpoint}/upload`,request,{headers:{"Authorization":`Bearer ${token}`}})   
             console.log(response)

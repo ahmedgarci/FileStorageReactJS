@@ -9,7 +9,8 @@ import { Button } from "../UI/Button";
 import Loading from "../Common/Loading";
 
 export default function UploadFileForm() {
-    const [request,setRequest] = useState<UploadFileRequest>({form:undefined,title:undefined})
+    const [title,setTitle] = useState<string>()
+    const [file,setFile] = useState<File>()
     const [loading,setIsLoading] = useState<boolean>(false)
     const [error,setError] = useState<string|null>(null)
     const [success,setSuccess] = useState<string|null>()
@@ -22,15 +23,16 @@ export default function UploadFileForm() {
             setError("no file was provided ")
             return;
         }
-        const Formdata = new FormData();
-        Formdata.append("file",file as Blob);
-        setRequest({...request,form:Formdata})
+        setFile(file);
     }
 
     const HandleUploadFile = async()=>{
         setError(null)
         setSuccess(null)
         setIsLoading(true)
+        const request = new FormData()
+        request.append("file",file as Blob)
+        request.append("title",title || "");  
         try {
             const response = await FileService.UploadNewFile(request,auth.jwt!)
             setSuccess("file uploaded successfully !")
@@ -47,7 +49,7 @@ export default function UploadFileForm() {
                 <hr/>
             <div className="flex flex-col items-center gap-4 mt-6" >
                 <Input
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>setRequest({...request,title:e.target.value})}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>setTitle(e.target.value)}
                     style="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
                     textToDisplay="File title"
                 />
@@ -66,7 +68,6 @@ export default function UploadFileForm() {
                      style="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition duration-300"
                      textToDisplay="upload" />
                 }
-               
             </div>
 
         </>

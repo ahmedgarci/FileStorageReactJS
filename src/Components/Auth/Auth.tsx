@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { Button } from "../Components/UI/Button";
-import { Input } from "../Components/UI/Input";
-import Label from "../Components/UI/Label";
-import Loading from "../Components/Common/Loading";
-import AuthService from "../Services/AuthService";
+import { Button } from "../UI/Button";
+import { Input } from "../UI/Input";
+import Label from "../UI/Label";
+import Loading from "../Common/Loading";
+import AuthService from "../../Services/AuthService";
 import { useDispatch } from "react-redux";
-import { SETAUTHENTICATION } from "../State/AuthSlice";
-import { AuthRequest } from "../Types/Requests/Auth/AuthRequest";
-import { AuthResponse } from "../Types/Responses/AuthType";
+import { SETAUTHENTICATION } from "../../State/AuthSlice";
+import { AuthRequest } from "../../Types/Requests/Auth/AuthRequest";
+import { AuthResponse } from "../../Types/Responses/AuthType";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
     const [user, setUser] = useState<AuthRequest>({ email: "", password: "" });
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<[] | null>(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ function Auth() {
             dispatch(SETAUTHENTICATION(response));
             navigate("/main");
         } catch (error: any) {
-            setError("Invalid email or password. Please try again.");
+            setError(error);
         } finally {
             setIsLoading(false);
         }
@@ -37,7 +37,9 @@ function Auth() {
             <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
                 Login to Your Account
             </h2>
-            {error && <p className="text-red-500 text-center">{error}</p>}
+            {error && error.map((element)=>{
+                return <p className="text-red-500 text-start">*{element}</p>})
+            }
             <form onSubmit={HandleSubmit} className="text-start">
                 <div className="mb-4">
                     <Label style="block text-gray-700 mb-2" textToDisplay="Email" />
@@ -65,8 +67,8 @@ function Auth() {
                     />
                 )}
             </form>
-
-          
+            
+                    
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Auth } from "./Auth";
-import Register from "./Register";
+import { Auth } from "../Components/Auth/Auth";
+import Register from "../Components/Auth/Register";
+import { EmbedPDF } from "@simplepdf/react-embed-pdf";
 
 export default function AuthenticationPage() {
     const [activePage, setActivePage] = useState<string>("login");
@@ -16,6 +17,7 @@ export default function AuthenticationPage() {
                     >
                         Login
                     </button>
+                    
                     <button
                         className={`w-1/2 text-center py-3 font-semibold transition duration-300 
                         ${activePage === "register" ? "bg-black text-white" : "bg-white text-black"}`}
@@ -26,6 +28,8 @@ export default function AuthenticationPage() {
                 </div>
 
                 {activePage === "login" ? <Auth /> : <Register />}
+
+               
             </div>
         </div>
     );
